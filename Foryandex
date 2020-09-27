@@ -1,0 +1,70 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include<conio.h>
+
+using namespace std;
+int main() {
+    setlocale(LC_ALL, "rus");
+    float s, min = 0, max = 0;
+    float fix_1 = 12313, fix_2 = 0;
+
+    int table_1[3][4] = {
+        {5, 2, 0, 10},
+        {3, 5, 2, 5},
+        {20, 0, 0, 0}    
+    };
+    float table_2[4][2] = {
+        {1.2f, 0.5f},
+        {2.8f, 0.4f},
+        {5.0f, 1.0f},
+        {2.0f, 1.5f}
+    };
+    float table_3[3][2];
+    for (int m = 0; m < 2; m++) {
+        for (int i = 0; i < 3; i++) {
+            s = 0;
+            for (int j = 0; j < 4; j++) {
+                s = s + (table_1[i][j] * table_2[j][m]);
+                table_3[i][m] = s;
+            }
+        }
+    }
+    for (int h = 0; h < 3; h++) {
+        cout << " " << endl;
+        for (int l = 0; l < 2; l++) {
+            cout << table_3[h][l] << " ";
+        }
+    }
+    for (int i = 0; i < 2; i++) cout << endl;
+
+    for (int i = 0; i < 3; i++) if ((table_3[i][0] + table_3[i][1]) >= fix_2) max = i + 1, fix_2 = table_3[i][0] + table_3[i][1];
+    for (int i = 0; i < 3; i++) if ((table_3[i][0] + table_3[i][1]) <= fix_1) min = i + 1, fix_1 = table_3[i][0] + table_3[i][1];
+    cout << "Продавец с наибольшей общей суммой - " << max << endl;
+    cout << "Продавец с наименьшей общей суммой - " << min << endl;
+    min = 0;
+    max = 0;
+    fix_1 = 123123;
+    fix_2 = 0;
+    for (int i = 0; i < 3; i++) if (table_3[i][1] < fix_1) min = i + 1, fix_1 = table_3[i][1];
+    for (int i = 0; i < 3; i++) if (table_3[i][1] > fix_2) max = i + 1, fix_2 = table_3[i][1];
+    cout << "Продавец с наибольшей комиссией - " << max << endl;
+    cout << "Продавец с наименьшей комиссией - " << min << endl;
+    min = 0;
+    max = 0;
+    fix_1 = 123123;
+    fix_2 = 0;
+    for (int i = 0; i < 3; i++) if (table_3[i][0] < fix_1) min = i + 1, fix_1 = table_3[i][0];
+    for (int i = 0; i < 3; i++) if (table_3[i][0] > fix_2) max = i + 1, fix_2 = table_3[i][0];
+    cout << "Продавец с наибольшей прибылью с продажи - " << max << endl;
+    cout << "Продавец с наименьшей прибылью с продажи - " << min << endl;
+    min = 0;
+    max = 0;
+    for (int i = 0; i < 3; i++) min = min + table_3[i][0];
+    for (int i = 0; i < 3; i++) max = max + table_3[i][1];
+    cout << "Вся прибыль с продажи - " << min << endl;
+    cout << "Вся прибыль с комиссии - " << max << endl;
+    cout << "Количество денег, прошедших через продавцов - " << max + min << endl;
+    //cout << table_3;
+
+}
